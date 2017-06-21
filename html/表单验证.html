@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+        	
+        </style>
+        <script type="text/javascript" src="jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="Validform_v5.3.2/Validform_v5.3.2.js"></script>
+    </head>
+    <body>
+	   <form action="test.php" id="myForm">
+                <ul>
+                    <li>账号：
+                        <input type="text" name="number" ajaxurl="number.php" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！">
+                        <div class="Validform_checktip"></div>
+                    </li>
+                    <li>密码：
+                        <input type="password" name="password" datatype="*6-15" errormsg="密码范围在6~15位之间！">
+                        <div class="Validform_checktip"></div>
+                    </li>
+                    <li>邮箱：
+                        <input type="email" name="email" datatype="e" errormsg="邮箱格式不正确！">
+                        <div class="Validform_checktip"></div>
+                    </li>
+                    <li>内容：
+                        <textarea name="content" id="" cols="30" rows="10" tip="请在这里输入您的意见。" errormsg="很感谢您花费宝贵时间给我们提供反馈，请填写有效内容！"  datatype="s" altercss="gray"></textarea>
+                        <div class="Validform_checktip"></div>
+                    </li>
+                    <li>性别：
+                        <input type="radio" class="radio" name="sex" value='1' datatype="*" nullmsg="请选择性别！" errormsg="请选择性别！" >男 
+                        <input type="radio" class="radio" name="sex" value='0' >女 
+                        <div class="Validform_checktip"></div>
+                    </li>
+                    <li>
+                        select：
+                        <select name="select" datatype="*" nullmsg="请选择！" errormsg="请选择！" >
+                            <option value="开启">开启</option>
+                            <option value="关闭">关闭</option>
+                        </select>
+                        <div class="Validform_checktip"></div>
+                    </li>
+                    <li>爱好：
+                        <input type="checkbox" class="check" name="hopoy[]" value="足球" datatype="*" nullmsg="请选择爱好！" errormsg="请选择性别！" >足球
+                        <input type="checkbox" class="check" name="hopoy[]" value="篮球" >篮球
+                        <input type="checkbox" class="check" name="hopoy[]" value="排球" >排球
+                        <div class="Validform_checktip"></div>
+                    </li>
+                    <li><input type="submit" value="提交" class="btn"><input type="reset" value="重置" class="btn"></li>
+                </ul>
+                <div id="dump"></div>
+            </form>
+
+    </body>
+    <script>
+    $(function() {
+
+        $("#myForm").Validform({ 		//$("#myForm")指明是哪一表单需要验证,名称需加在form表单上
+            tiptype:function(msg,o,cssctl){		
+
+                if(!o.obj.is("form")){
+                    var objtip=o.obj.siblings(".Validform_checktip");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }else{
+                    var objtip=o.obj.find("#dump");
+                    cssctl(objtip,o.type);
+                    objtip.text(msg);
+                }
+
+            },
+            ajaxPost:true
+        });
+
+    })
+</script>
+</html>
